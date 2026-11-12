@@ -1,0 +1,239 @@
+{
+  "fonte": "SSP-SP — Celulares Subtraídos 2025 (https://www.ssp.sp.gov.br/estatistica/consultas)",
+  "registros": {
+    "originais": 383635,
+    "sp_fato_linhas": 216287,
+    "sp_um_por_bo": 185088,
+    "roubo_furto_sp": 160024,
+    "base_balanceada": 117176,
+    "por_classe": 58588,
+    "treino": 82023,
+    "validacao": 17576,
+    "teste": 17577
+  },
+  "proporcoes": {
+    "Treino": 0.7,
+    "Validação": 0.15,
+    "Teste": 0.15
+  },
+  "n_entradas": 596,
+  "atributos": [
+    "BAIRRO",
+    "LOGRADOURO",
+    "PERIODO",
+    "SUBLOCAL",
+    "MARCA",
+    "DIA_SEMANA"
+  ],
+  "categorias_por_atributo": {
+    "BAIRRO": 201,
+    "LOGRADOURO": 301,
+    "PERIODO": 5,
+    "SUBLOCAL": 61,
+    "MARCA": 21,
+    "DIA_SEMANA": 7
+  },
+  "treino_config": {
+    "otimizador": "Adam",
+    "lr": 0.001,
+    "perda": "binary_crossentropy",
+    "batch_size": 128,
+    "max_epocas": 40,
+    "early_stopping_paciencia": 4,
+    "seed": 42
+  },
+  "arquiteturas": {
+    "Arq. 1 (Base)": [
+      [
+        "dense",
+        64
+      ],
+      [
+        "dense",
+        32
+      ]
+    ],
+    "Arq. 2 (Dropout)": [
+      [
+        "dense",
+        64
+      ],
+      [
+        "drop",
+        0.3
+      ],
+      [
+        "dense",
+        32
+      ],
+      [
+        "drop",
+        0.3
+      ]
+    ],
+    "Arq. 3 (Profunda)": [
+      [
+        "dense",
+        128
+      ],
+      [
+        "drop",
+        0.3
+      ],
+      [
+        "dense",
+        64
+      ],
+      [
+        "drop",
+        0.3
+      ],
+      [
+        "dense",
+        32
+      ]
+    ],
+    "Arq. 4 (Larga)": [
+      [
+        "dense",
+        256
+      ],
+      [
+        "drop",
+        0.5
+      ],
+      [
+        "dense",
+        128
+      ],
+      [
+        "drop",
+        0.5
+      ]
+    ]
+  },
+  "comparativo_validacao": {
+    "Arq. 1 (Base)": {
+      "Acurácia": 0.7131884387801548,
+      "Precision": 0.7334579439252337,
+      "Recall": 0.6697769685935366,
+      "F1-Score": 0.7001724855766371,
+      "AUC": 0.7876180075698045,
+      "Acc. treino": 0.7281860113143921,
+      "Gap (treino−val)": 0.014997601509094238,
+      "Épocas": 7.0,
+      "Parâmetros": 40321.0
+    },
+    "Arq. 2 (Dropout)": {
+      "Acurácia": 0.7168866636322258,
+      "Precision": 0.7319299099537601,
+      "Recall": 0.6844560764679107,
+      "F1-Score": 0.7073973891567682,
+      "AUC": 0.7893417330683687,
+      "Acc. treino": 0.722870409488678,
+      "Gap (treino−val)": 0.00598376989364624,
+      "Épocas": 7.0,
+      "Parâmetros": 40321.0
+    },
+    "Arq. 3 (Profunda)": {
+      "Acurácia": 0.7139280837505689,
+      "Precision": 0.7408403791954906,
+      "Recall": 0.6580564406008192,
+      "F1-Score": 0.6969989152705798,
+      "AUC": 0.787203693993278,
+      "Acc. treino": 0.7204808592796326,
+      "Gap (treino−val)": 0.006552755832672119,
+      "Épocas": 6.0,
+      "Parâmetros": 86785.0
+    },
+    "Arq. 4 (Larga)": {
+      "Acurácia": 0.7144970414201184,
+      "Precision": 0.7353896103896104,
+      "Recall": 0.6701183431952663,
+      "F1-Score": 0.7012383900928792,
+      "AUC": 0.7895759457749416,
+      "Acc. treino": 0.7224680781364441,
+      "Gap (treino−val)": 0.007971048355102539,
+      "Épocas": 7.0,
+      "Parâmetros": 185857.0
+    }
+  },
+  "baseline_regressao_logistica_val": {
+    "Acurácia": 0.7100022758306782,
+    "F1-Score": 0.7153944943882964,
+    "AUC": 0.781468823398647
+  },
+  "modelo_escolhido": "Arq. 2 (Dropout)",
+  "teste": {
+    "acuracia": 0.7167889856061899,
+    "auc": 0.7922057900405465,
+    "matriz_confusao": [
+      [
+        6584,
+        2205
+      ],
+      [
+        2773,
+        6015
+      ]
+    ],
+    "precision_furto": 0.7036443304477931,
+    "recall_furto": 0.7491182159517579,
+    "f1_furto": 0.7256695690510305,
+    "precision_roubo": 0.7317518248175182,
+    "recall_roubo": 0.6844560764679107,
+    "f1_roubo": 0.7073142050799623,
+    "precision_macro": 0.7176980776326556,
+    "recall_macro": 0.7167871462098343,
+    "f1_macro": 0.7164918870654964
+  },
+  "diagnostico": {
+    "epoca_melhor": 3,
+    "epocas_executadas": 7,
+    "acc_treino": 0.722870409488678,
+    "acc_val": 0.7168866395950317,
+    "acc_teste": 0.7167889856061899,
+    "loss_treino": 0.5493252277374268,
+    "loss_val": 0.5541970133781433,
+    "gap": 0.00598376989364624,
+    "texto": "Ajuste equilibrado: gap pequeno entre treino e validação (sem overfitting relevante)."
+  },
+  "historico_escolhido": {
+    "accuracy": [
+      0.6899406313896179,
+      0.7175304293632507,
+      0.722870409488678,
+      0.7264181971549988,
+      0.7307340502738953,
+      0.7335015535354614,
+      0.7350133657455444
+    ],
+    "loss": [
+      0.5872340798377991,
+      0.5562872886657715,
+      0.5493252277374268,
+      0.5442909002304077,
+      0.5396244525909424,
+      0.5358288884162903,
+      0.5322640538215637
+    ],
+    "val_accuracy": [
+      0.7119936347007751,
+      0.7160901427268982,
+      0.7168866395950317,
+      0.717114269733429,
+      0.7184228301048279,
+      0.7165452837944031,
+      0.7151228785514832
+    ],
+    "val_loss": [
+      0.5608113408088684,
+      0.555941641330719,
+      0.5541970133781433,
+      0.5544114112854004,
+      0.5542480945587158,
+      0.5543555021286011,
+      0.5550402402877808
+    ]
+  }
+}
