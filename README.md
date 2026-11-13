@@ -67,13 +67,13 @@ Quatro arquiteturas foram comparadas (ReLU nas ocultas, saída com 1 neurônio s
 | Furto | 0,70 | 0,75 | 0,73 | 
 | Roubo | 0,73 | 0,68 | 0,71 | 
 
-Divisão: treino 82.023 | validação 17.576 | teste 17.577. As quatro arquiteturas ficaram muito próximas, e o `EarlyStopping` limitou o overfitting (gap entre treino e validação < 0.01). O desempenho é limitado pela informação dos atributos categóricos, não pela capacidade da rede.
+Divisão: treino 82.023 | validação 17.576 | teste 17.577. As quatro arquiteturas ficaram muito próximas, e o `EarlyStopping` limitou o overfitting (gap treino–validação de 0,006 no modelo escolhido). O desempenho é limitado pela informação dos atributos categóricos, não pela capacidade da rede.
 
 ## 📁 Estrutura
 
 | Arquivo | Descrição | 
 | ----- | ----- | 
-| `Notebook_GS_MLP_SP.ipynb` | Preparação dos dados, treino das 4 arquiteturas, métricas, curvas e geração do modelo. | 
+| `GS_MPL_SP_FxR.ipynb` | Preparação dos dados, treino das 4 arquiteturas, métricas, curvas e geração do modelo. | 
 | `app.py` | Aplicação web (Streamlit). | 
 | `artefatos/modelo_mlp.keras` | Modelo treinado definitivo (Arq. 2). | 
 | `artefatos/colunas_treino.json` | Lista exata das 596 colunas de entrada (One-Hot). | 
@@ -97,6 +97,8 @@ streamlit run app.py
 3. Executar todas as células. Ao final, a pasta `artefatos/` será preenchida com `modelo_mlp.keras`, `colunas_treino.json` e `categorias.json`.
 
 ## ⚠️ Limitações
+
+* Categorias com variação de acento/caixa (ex.: REPUBLICA/REPÚBLICA) não foram unificadas, o que divide parte do sinal entre colunas.
 
 * Muitas ocorrências com as mesmas características têm rótulos diferentes (ruído irredutível), o que limita a acurácia.
 
